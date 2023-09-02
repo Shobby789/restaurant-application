@@ -1,0 +1,27 @@
+ul li {
+  list-style: none;
+  border-radius: 10px;
+  color: white !important;
+}
+
+ul li:hover {
+  background-color: whitesmoke;
+  color: black;
+  border-radius: 10px;
+  transition: 0.4s;
+}
+
+ul li a:hover {
+  color: black !important;
+  transition: 0.4s;
+}
+
+main {
+  width: 100%;
+}
+
+.dashboard {
+  box-shadow: 10px 10px 20px black;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}

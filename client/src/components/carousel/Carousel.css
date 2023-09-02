@@ -1,0 +1,51 @@
+.c-item {
+  width: 100%;
+  height: 100vh;
+}
+
+.c-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel-caption {
+  position: absolute;
+  top: 30%;
+  left: 0%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-caption > h1 {
+  font-size: 4vw;
+  color: white;
+}
+
+.carousel-caption > p {
+  width: 70%;
+}
+
+@media screen and (max-width: 600px) {
+  .c-item {
+    height: 100vh;
+  }
+
+  .carousel-caption {
+    position: absolute;
+    top: 0%;
+    bottom: 15%;
+  }
+
+  .carousel-caption > h1 {
+    font-size: 12vw;
+    width: 90%;
+    margin: auto;
+  }
+
+  .carousel-caption > p {
+    width: 90%;
+  }
+}

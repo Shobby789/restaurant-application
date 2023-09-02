@@ -1,0 +1,40 @@
+.loginPage {
+  background-color: black;
+}
+
+.loginContainer {
+  width: 85%;
+  height: 80vh;
+}
+
+.loginBox {
+  height: 100%;
+  width: 42%;
+  /* background-color: white; */
+}
+
+.imgBox {
+  width: 58%;
+  height: 100%;
+  background-color: brown;
+  background-image: url("https://img.freepik.com/free-photo/gourmet-chicken-biryani-with-steamed-basmati-rice-generated-by-ai_188544-13480.jpg?t=st=1690654952~exp=1690658552~hmac=49b4ace14d0d8c4636634e607050b6bed87434a2fc0791b722bd71f4f587587e&w=1060");
+  background-size: cover;
+  background-position: center;
+}
+
+@media screen and (max-width: 600px) {
+  .imgBox {
+    display: none;
+  }
+
+  .loginContainer {
+    width: 100%;
+    padding: 0;
+  }
+
+  .loginBox {
+    width: 95%;
+    margin: 0 auto;
+    /* height: 90vh; */
+  }
+}

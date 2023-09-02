@@ -1,0 +1,12 @@
+.categoryBtn {
+  color: black;
+  border: 2px solid orangered;
+  border-radius: 0;
+  font-weight: 600;
+}
+
+.categoryBtn:hover {
+  background-color: orangered;
+  color: white;
+  transition: 0.4s;
+}

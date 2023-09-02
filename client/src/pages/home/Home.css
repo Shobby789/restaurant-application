@@ -1,0 +1,13 @@
+.products {
+  width: 100%;
+  height: 150vh !important;
+  /* background-image: url("https://img.freepik.com/free-photo/cutlery-near-twig-leaves_23-2147811214.jpg?w=1060&t=st=1690660899~exp=1690661499~hmac=0b7a35d882a478a00f449c0fa464c657e46ce392f12f79552e50f922de6bb6ac");
+  background-position: center;
+  background-size: cover; */
+}
+
+@media screen and (max-width: 600px) {
+  .products {
+    height: auto !important;
+  }
+}

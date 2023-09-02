@@ -1,0 +1,38 @@
+.registerPage {
+  background-color: black;
+  font-family: cursive;
+}
+
+.registerContainer {
+  width: 85%;
+  height: 80vh;
+}
+
+.registerBox {
+  width: 42%;
+  height: 100%;
+  /* background-color: white; */
+  padding-left: 50px;
+}
+
+.registerForm {
+  width: 83%;
+}
+
+@media screen and (max-width: 600px) {
+  .imgBox {
+    display: none;
+  }
+
+  .registerContainer {
+    width: 100%;
+    padding: 0;
+  }
+
+  .registerBox {
+    width: 95%;
+    margin: 0 auto;
+    padding-left: 40px;
+    /* height: 90vh; */
+  }
+}
