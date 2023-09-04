@@ -10,21 +10,23 @@ import Cart from "./pages/cart/Cart";
 import About from "./pages/about/About";
 import Checkout from "./pages/checkout/Checkout";
 import UserOrders from "./pages/userOrders/UserOrders";
+import Layout from "./Layout";
 
 function App() {
   return (
     <div className="App">
-      <Navbar />
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/menu" element={<Menu />} />
-        <Route path="/myOrders" element={<UserOrders />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/menu" element={<Menu />} />
+          <Route path="/myOrders" element={<UserOrders />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
+        </Route>
       </Routes>
     </div>
   );
