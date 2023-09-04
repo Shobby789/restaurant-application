@@ -23,7 +23,7 @@ export default function Items() {
   }, []);
 
   return (
-    <div className="container-fluid bg-dark p-5 text-dark">
+    <div className="container-fluid p-5 text-dark">
       <h2>Items</h2>
       <div className="container">
         <div className="container mb-3 d-flex flex-wrap justify-content-evenly align-items-center pb-5">

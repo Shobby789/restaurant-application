@@ -63,7 +63,11 @@ export default function SideBarMenu({ children }) {
           </div>
           <main
             className="col-auto col-md-10 py-4 px-0 text-white"
-            style={{ background: "black", color: "black" }}
+            style={{
+              color: "black",
+              maxHeight: "100vh",
+              overflowY: "scroll",
+            }}
           >
             {children}
           </main>
