@@ -43,10 +43,10 @@ export default function ProductGrid() {
 
   return (
     <>
-      <div className="container-fluid py-5 text-white text-center">
-        <h2 className="fw-bold text-light">What We Offer</h2>
+      <div className="container-fluid py-5 text-light text-center">
+        <h2 className="fw-bold">What We Offer</h2>
         {/* Filter Buttons */}
-        <div className="container d-flex justify-content-center align-items-center flex-wrap pt-3 border-bottom border-dark">
+        <div className="container d-flex justify-content-center align-items-center flex-wrap pt-3">
           <button
             className="btn btn-dark border-0 text-light pb-2 px-4 m-3 categoryBtn"
             onClick={() => getItems()}

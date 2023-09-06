@@ -11,8 +11,9 @@ import { useNavigate } from "react-router-dom";
 export default function Home() {
   const navigate = useNavigate();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const loggedInUser = JSON.parse(localStorage.getItem("userDetails"));
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (!loggedInUser) {
       navigate("/login");
     }
   }, []);

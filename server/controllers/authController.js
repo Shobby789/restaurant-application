@@ -6,24 +6,22 @@ const jwt = require("jsonwebtoken");
 const { SECRET_KEY } = require("../data/key");
 
 module.exports.createUser = async (req, res) => {
-  const { userName, address, phoneNumber, email, password } = req.body;
-  console.log("body data: ", req.body);
+  const { name, email, password } = req.body;
+  // console.log("body data: ", req.body);
   const encryptedPassword = await bcrypt.hash(password, 10);
   try {
     const oldUser = await User.findOne({ email });
     if (oldUser) {
-      return res.json({ error: "User Exists" });
+      return res.json({ status: "User Already Exists" });
     }
     await User.create({
-      userName,
-      address,
-      phoneNumber,
+      name,
       email,
       password: encryptedPassword,
     });
-    res.send({ status: "ok user created" });
+    res.send({ status: "Registerd successfully" });
   } catch (error) {
-    res.send({ status: "error" });
+    res.send({ status: "Register failed" });
   }
 };
 
@@ -41,9 +39,9 @@ module.exports.loginUser = async (req, res) => {
 
     if (res.status(201)) {
       // res.redirect("/home");
-      return res.json({ status: "ok", data: { user, token } });
+      return res.json({ status: "Login successfull", data: { user, token } });
     } else {
-      return res.json({ error: "error" });
+      return res.json({ error: "Login failed" });
     }
   }
   res.json({ status: "error", error: "InvAlid Password" });
@@ -55,5 +53,23 @@ module.exports.getAllUsers = async (req, res) => {
     res.status(200).json(allCustomers);
   } catch (error) {
     res.status(400).send({ error: error });
+  }
+};
+
+module.exports.resetPassword = async (req, res) => {
+  try {
+    const { email, newPassword } = req.body;
+    // console.log("email & newPass >> ", email + " ", newPassword);
+    const findUser = User.findOne({ email });
+    if (!findUser) {
+      res.send({ status: "Email does not exist" });
+    } else {
+      const encryptedPassword = await bcrypt.hash(newPassword, 10);
+      await User.findOneAndUpdate(email, { password: encryptedPassword });
+      res.json({ status: "Password Reset Successully" });
+    }
+  } catch (error) {
+    console.log("resetPassword error >> ", error);
+    res.send({ status: "Some error occurred" });
   }
 };

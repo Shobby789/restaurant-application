@@ -37,27 +37,30 @@ export default function Navbar() {
           <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link className="nav-link fw-semibold" to="/home">
+                <Link className="nav-link text-light fw-semibold" to="/">
                   Home
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link fw-semibold" to="/about">
+                <Link className="nav-link text-light fw-semibold" to="/about">
                   About
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link fw-semibold" to="/menu">
+                <Link className="nav-link text-light fw-semibold" to="/menu">
                   Menu
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link fw-semibold" to="/myOrders">
+                <Link
+                  className="nav-link text-light fw-semibold"
+                  to="/myOrders"
+                >
                   My Orders
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link fw-semibold" to="/contact">
+                <Link className="nav-link text-light fw-semibold" to="/contact">
                   Contact
                 </Link>
               </li>

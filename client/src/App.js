@@ -3,7 +3,6 @@ import { Route, Routes } from "react-router-dom";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import Home from "./pages/home/Home";
-import Navbar from "./components/navbar/Navbar";
 import Menu from "./pages/menu/Menu";
 import Contact from "./pages/contact/Contact";
 import Cart from "./pages/cart/Cart";
@@ -11,6 +10,7 @@ import About from "./pages/about/About";
 import Checkout from "./pages/checkout/Checkout";
 import UserOrders from "./pages/userOrders/UserOrders";
 import Layout from "./Layout";
+import ForgorPassword from "./pages/forgotPassword/ForgorPassword";
 
 function App() {
   return (
@@ -18,6 +18,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/forgotPassword" element={<ForgorPassword />} />
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="/about" element={<About />} />

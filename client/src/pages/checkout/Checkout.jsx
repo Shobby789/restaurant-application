@@ -57,7 +57,8 @@ export default function Checkout() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          userId: loggedInUser.user._id,
+          customerId: loggedInUser.user._id,
+          customerAddress: address,
           orderedItems: cart.cartItems,
           orderAmount: cart.cartTotalAmount + 100,
           status: "Pending",
@@ -78,7 +79,7 @@ export default function Checkout() {
         expiryDate: 0,
       });
       alert(response.status);
-      navigate("/home");
+      navigate("/");
     }
   };
   return (

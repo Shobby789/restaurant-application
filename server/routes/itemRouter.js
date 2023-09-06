@@ -84,7 +84,7 @@ router.delete("/deleteItem/:_id", async (req, res) => {
     if (!deletedItem) {
       res.send({ status: "item not found", data: "error" });
     } else {
-      res.send({ status: "ok! item deleted" });
+      res.send({ status: "Item deleted successfully" });
     }
   } catch (error) {
     console.log(error);
@@ -101,10 +101,18 @@ router.get(`/editItem/:_id`, (req, res) => {
 });
 
 router.post("/placeOrder", async (req, res) => {
-  const { userId, orderedItems, orderAmount, status, date } = req.body;
+  const {
+    customerId,
+    customerAddress,
+    orderedItems,
+    orderAmount,
+    status,
+    date,
+  } = req.body;
   try {
     await Orders.create({
-      userId,
+      customerId,
+      customerAddress,
       orderedItems,
       orderAmount,
       status,
@@ -120,10 +128,10 @@ router.post("/placeOrder", async (req, res) => {
 router.post("/getMyOrders", async (req, res) => {
   try {
     const { userId } = req.body;
-    // console.log("getMyOrders userId >>> ", userId);
+    console.log("getMyOrders userId >>> ", userId);
     const myOrders = await Orders.find({});
     const userOrder = myOrders.map((order) => {
-      if (order.userId == userId) {
+      if (order.customerId == userId) {
         return order;
       } else {
         return "No Orders Found";
@@ -146,6 +154,7 @@ router.get("/getOrders", async (req, res) => {
   }
 });
 
+// accept / reject order
 router.put("/order/:_id", async (req, res) => {
   try {
     const _id = req.params._id;

@@ -2,11 +2,12 @@ const mongoose = require("mongoose");
 
 const orderSchema = new mongoose.Schema(
   {
-    userId: { type: String, unique: false },
-    orderedItems: { type: Array },
-    orderAmount: { type: Number },
-    status: { type: String },
-    date: { type: String },
+    customerId: { type: String, unique: false },
+    customerAddress: { type: String, required: true },
+    orderedItems: { type: Array, required: true },
+    orderAmount: { type: Number, required: true },
+    status: { type: String, required: true },
+    date: { type: String, required: true },
   },
   {
     collection: "Orders",

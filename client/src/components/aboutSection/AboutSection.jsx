@@ -1,5 +1,5 @@
 import "./AboutSection.css";
-import aboutImg from "../../images/black-bg/4.png";
+import aboutImg from "../../images/black-bg/jonathan-borba-8l8Yl2ruUsg-unsplash.jpg";
 
 export default function AboutSection() {
   return (
@@ -7,7 +7,7 @@ export default function AboutSection() {
       <div className="container py-5">
         <div className="row">
           <div className="col-lg-6 col-md-6 col-sm-12 px-3">
-            <img src={aboutImg} alt="" className="img-fluid h-100" />
+            <img src={aboutImg} alt="" className="img-fluid h-100 aboutImg" />
           </div>
           <div className="col-lg-6 col-md-6 col-sm-12 px-3 aboutText">
             <h1 className="mb-3 fw-bold">Best Restaurant in Your Home Town</h1>

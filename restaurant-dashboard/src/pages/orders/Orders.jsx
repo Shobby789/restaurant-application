@@ -3,7 +3,6 @@ import "./Orders.css";
 
 export default function Orders() {
   const [orders, setOrders] = useState([]);
-
   const fetchOrders = async () => {
     try {
       const res = await fetch("http://localhost:4000/api/getOrders", {
@@ -58,7 +57,7 @@ export default function Orders() {
   };
 
   return (
-    <div className="p-5 text-light">
+    <div className="p-5 text-dark">
       <h4>Orders</h4>
       <div className="container py-3">
         {orders.length > 0 ? (
@@ -70,13 +69,13 @@ export default function Orders() {
                   key={_id}
                 >
                   <div className="container w-100 px-0">
-                    <h6 className="">
+                    <h6 className="text-dark">
                       Order Status:
                       <span className="btn btn-outline-danger btn-sm ms-1 disabled p-1 rounded">
                         {status}
                       </span>
                     </h6>
-                    <h6 className="">
+                    <h6 className="text-dark">
                       Order Amount: <span>{orderAmount}</span>
                     </h6>
                   </div>

@@ -19,6 +19,10 @@
   width: 83%;
 }
 
+.themeText {
+  color: orangered;
+}
+
 @media screen and (max-width: 600px) {
   .imgBox {
     display: none;

@@ -1,9 +1,14 @@
 import { useState } from "react";
 import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../../features/authSlice/authSlice";
 
 export default function Login() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  // const user = useSelector((state) => state.auth.user);
+  // const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const [loginDetail, setLoginDetail] = useState({
     email: "",
     password: "",
@@ -28,7 +33,11 @@ export default function Login() {
       .then((data) => {
         // console.log("loginData: ", data.data);
         localStorage.setItem("userDetails", JSON.stringify(data.data));
-        navigate("/home");
+        dispatch(setUser(data.data));
+        navigate("/");
+        setTimeout(() => {
+          alert(data.status);
+        }, 400);
       });
     setLoginDetail({ email: "", password: "" });
   };
@@ -36,15 +45,15 @@ export default function Login() {
     <>
       <div className="container-fluid loginPage d-flex align-items-center justify-content-center min-vh-100">
         <div className="container d-flex p-0 loginContainer">
-          <div className="loginBox bg-dark d-flex flex-column align-items-start ps-5 justify-content-center">
-            <h1 className="fw-bold mb-3 text-success">Urbee</h1>
-            <h4 className="pb-0 mb-0 text-light">Welcome Back</h4>
+          <div className="loginBox text-bg-dark d-flex flex-column align-items-start ps-5 justify-content-center">
+            <h1 className="fw-bold mb-3 themeText">Urbee</h1>
+            <h4 className="pb-0 mb-0">Welcome Back</h4>
             <p className="fs-6 text-secondary text-start">
               Sign in with your email and password
             </p>
             <form onSubmit={handleOnSubmit} className="w-75 pt-2 mb-3">
               <div className="mb-2 text-start">
-                <label htmlFor="" className="form-label text-secondary">
+                <label htmlFor="email" className="form-label text-secondary">
                   Email Address
                 </label>
                 <input
@@ -53,9 +62,9 @@ export default function Login() {
                   id="email"
                   value={loginDetail.email}
                   onChange={handleOnChage}
-                  className="form-control py-2 border-1"
+                  className="form-control bg-secondary border-0"
                   style={{
-                    background: "silver",
+                    // background: "silver",
                     borderRadius: "0",
                   }}
                 />
@@ -70,13 +79,13 @@ export default function Login() {
                   id="password"
                   value={loginDetail.password}
                   onChange={handleOnChage}
-                  className="form-control py-2 border-1"
-                  style={{ background: "silver", borderRadius: "0" }}
+                  className="form-control bg-secondary border-0"
+                  style={{ borderRadius: "0" }}
                 />
               </div>
               <p className="text-end mb-0">
                 <Link
-                  to="/"
+                  to="/forgotPassword"
                   className="text-decoration-none text-secondary fs-6"
                 >
                   Forgot Password
@@ -84,8 +93,8 @@ export default function Login() {
               </p>
               <button
                 type="submit"
-                className="float-start mt-0 btn btn-success border-0 fs-6 px-4 pb-2"
-                style={{ borderRadius: "0" }}
+                className="float-start mt-0 btn text-light border-0 fs-6 px-4 pb-2"
+                style={{ borderRadius: "0", background: "orangered" }}
               >
                 Sign In
               </button>
@@ -94,7 +103,7 @@ export default function Login() {
               <span className="me-2">Don't have an account?</span>
               <Link
                 to="/register"
-                className="text-success text-decoration-none fw-semibold"
+                className="themeText text-decoration-none fw-semibold"
               >
                 Sign Up
               </Link>
