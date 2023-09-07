@@ -39,12 +39,12 @@ module.exports.loginUser = async (req, res) => {
 
     if (res.status(201)) {
       // res.redirect("/home");
-      return res.json({ status: "Login successfull", data: { user, token } });
+      return res.json({ status: "Ok", data: { user, token } });
     } else {
       return res.json({ error: "Login failed" });
     }
   }
-  res.json({ status: "error", error: "InvAlid Password" });
+  res.json({ status: "Invalid email or password", error: "InvAlid Password" });
 };
 
 module.exports.getAllUsers = async (req, res) => {

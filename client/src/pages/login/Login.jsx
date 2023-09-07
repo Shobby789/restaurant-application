@@ -1,14 +1,12 @@
 import { useState } from "react";
 import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setUser } from "../../features/authSlice/authSlice";
 
 export default function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // const user = useSelector((state) => state.auth.user);
-  // const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const [loginDetail, setLoginDetail] = useState({
     email: "",
     password: "",
@@ -22,23 +20,25 @@ export default function Login() {
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    await fetch("http://localhost:4000/api/login", {
+    const res = await fetch("http://localhost:4000/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ email, password }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        // console.log("loginData: ", data.data);
-        localStorage.setItem("userDetails", JSON.stringify(data.data));
-        dispatch(setUser(data.data));
-        navigate("/");
-        setTimeout(() => {
-          alert(data.status);
-        }, 400);
-      });
+    });
+    const resp = await res.json();
+    console.log("Login resp>>>", resp);
+    if (resp.status === "Ok") {
+      navigate("/");
+      localStorage.setItem("userDetails", JSON.stringify(resp.data));
+      dispatch(setUser(resp.data));
+      setTimeout(() => {
+        alert("Login successfull");
+      }, 350);
+    } else {
+      alert(resp.status);
+    }
     setLoginDetail({ email: "", password: "" });
   };
   return (

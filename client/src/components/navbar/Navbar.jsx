@@ -2,12 +2,15 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import { HiMenu } from "react-icons/hi";
 import { FaShoppingCart } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutUser } from "../../features/authSlice/authSlice";
 
 export default function Navbar() {
+  const dispatch = useDispatch();
   const cart = useSelector((state) => state.allCart);
   const navigate = useNavigate();
   const handleLogout = () => {
+    dispatch(logoutUser());
     localStorage.clear();
     navigate("/login");
   };

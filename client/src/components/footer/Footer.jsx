@@ -38,18 +38,18 @@ export default function Footer() {
             </div>
             <div className="col-lg-3 col-md-3 col-sm-12 mb-3 d-flex flex-column justify-content-evenly">
               <h4 className="fw-semibold">Contact us</h4>
-              <a href="#" className="text-light text-decoration-none">
+              <Link to="/" className="text-light text-decoration-none">
                 Address: Block-14 Gulistan-e-Johar, Karachi
-              </a>
-              <a href="#" className="text-light text-decoration-none">
+              </Link>
+              <Link href="/" className="text-light text-decoration-none">
                 Call+: 1234567890
-              </a>
-              <a
-                href="mailto:mail.com"
+              </Link>
+              <Link
+                to="mailto:mail.com"
                 className="text-light text-decoration-none overflow-auto"
               >
                 Email: urbee@gmail.com
-              </a>
+              </Link>
             </div>
             <div className="col-lg-2 col-md-3 col-sm-12 mb-3 d-flex flex-column justify-content-evenly">
               <h4 className="fw-semibold">View Guides</h4>
@@ -82,12 +82,12 @@ export default function Footer() {
             style={{ fontSize: "1.1vw" }}
           >
             <span className="me-1">Connect with me:</span>
-            <a
-              href="mailto:smshoaib2001@gmail.com"
+            <Link
+              to="mailto:smshoaib2001@gmail.com"
               className="text-decoration-none text-secondary"
             >
               smshoaib2001@gmail.com
-            </a>
+            </Link>
           </p>
         </div>
       </div>
