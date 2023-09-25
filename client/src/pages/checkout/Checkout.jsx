@@ -3,14 +3,15 @@ import Items from "./Items";
 import CustomerInfoForm from "./CustomerInfoForm";
 import PaymentInfo from "./PaymentInfo";
 import "./Checkout.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { removeAllItems } from "../../features/cartSlice/cartSlice";
 
 export default function Checkout() {
   const navigate = useNavigate();
   const [count, setCount] = useState(0);
   const cart = useSelector((state) => state.allCart);
-  // console.log(object)
+  const dispatch = useDispatch();
   const loggedInUser = JSON.parse(localStorage.getItem("userDetails"));
   console.log("loggedInUser >> ", loggedInUser);
   const headings = ["Items", "Customer Info", "Payment Info"];
@@ -34,6 +35,7 @@ export default function Checkout() {
     cvc,
     expiryDate,
   } = customerDetail;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log("Customer Detail: ", customerDetail);
@@ -58,6 +60,7 @@ export default function Checkout() {
         },
         body: JSON.stringify({
           customerId: loggedInUser.user._id,
+          customerName: firstName + " " + lastName,
           customerAddress: address,
           orderedItems: cart.cartItems,
           orderAmount: cart.cartTotalAmount + 100,
@@ -66,7 +69,8 @@ export default function Checkout() {
         }),
       });
       const response = await res.json();
-      console.log("Order Placing API Resp >>> ", response);
+      // console.log("Order Placing API Resp >>> ", response);
+      dispatch(removeAllItems());
       localStorage.removeItem("cartItems");
       setCustomerDetail({
         firstName: "",
@@ -78,13 +82,15 @@ export default function Checkout() {
         cvc: "",
         expiryDate: 0,
       });
-      alert(response.status);
-      navigate("/");
+      setTimeout(() => {
+        alert(response.status);
+        // navigate("/");
+      }, 500);
     }
   };
   return (
-    <div className="container-fluid d-flex align-items-center justify-content-center pt-5 text-light min-vh-100">
-      <div className="d-flex flex-column justify-content-between checkoutContainer pt-5 border border-light py-3 px-4 rounded">
+    <div className="container-fluid pt-5 d-flex align-items-center justify-content-center pt-5 text-light min-vh-100">
+      <div className="d-flex mt-5 flex-column justify-content-between checkoutContainer pt-5 border border-light py-3 px-4 rounded">
         <h3 className="text-center fw-semibold">{headings[count]}</h3>
         <div className="">
           {(() => {

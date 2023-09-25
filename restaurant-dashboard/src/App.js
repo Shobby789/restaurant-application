@@ -1,25 +1,12 @@
-import { ToastContainer } from "react-toastify";
 import "./App.css";
 import AppRoutes from "./AppRoutes";
-import SideBarMenu from "./components/sideBarMenu/SideBarMenu";
+import SideBar from "./components/sidebar/SideBar";
 
 function App() {
   return (
-    <>
-      <ToastContainer
-        position="top-right"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
-      <SideBarMenu children={<AppRoutes />} />
-    </>
+    <div className="App">
+      <SideBar children={<AppRoutes />} />
+    </div>
   );
 }
 

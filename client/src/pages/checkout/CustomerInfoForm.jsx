@@ -25,7 +25,7 @@ export default function CustomerInfoForm({
               id="firstName"
               name="firstName"
               value={firstName}
-              className="form-control bg-secondary border-0 py-2 text-light fw-semibold"
+              className="form-control bg-secondary border-0 rounded-0 py-2 text-light fw-semibold"
               required
               onChange={handleOnChange}
             />
@@ -39,7 +39,7 @@ export default function CustomerInfoForm({
               id="lastName"
               name="lastName"
               value={lastName}
-              className="form-control bg-secondary border-0 py-2 text-light fw-semibold"
+              className="form-control bg-secondary border-0 rounded-0 py-2 text-light fw-semibold"
               required
               onChange={handleOnChange}
             />
@@ -55,7 +55,7 @@ export default function CustomerInfoForm({
               id="email"
               name="email"
               value={email}
-              className="form-control bg-secondary border-0 py-2 text-light fw-semibold"
+              className="form-control bg-secondary border-0 rounded-0 py-2 text-light fw-semibold"
               required
               onChange={handleOnChange}
             />
@@ -69,7 +69,7 @@ export default function CustomerInfoForm({
               id="phoneNumber"
               name="phoneNumber"
               value={phoneNumber}
-              className="form-control bg-secondary border-0 py-2 text-light fw-semibold"
+              className="form-control bg-secondary border-0 rounded-0 py-2 text-light fw-semibold"
               required
               onChange={handleOnChange}
             />
@@ -85,7 +85,7 @@ export default function CustomerInfoForm({
               id="address"
               name="address"
               value={address}
-              className="form-control bg-secondary border-0 py-2 text-light fw-semibold"
+              className="form-control bg-secondary border-0 rounded-0 py-2 text-light fw-semibold"
               required
               onChange={handleOnChange}
             />

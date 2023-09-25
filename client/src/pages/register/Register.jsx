@@ -32,11 +32,10 @@ export default function Register() {
       });
 
       const resp = await res.json();
-      alert(resp.status);
-      navigate("/login");
-      // setTimeout(() => {
-      //   alert(resp.status);
-      // }, 300);
+      setTimeout(() => {
+        alert(resp.status);
+        navigate("/login");
+      }, 300);
       setRegisterDetail({ name: "", email: "", password: "" });
     } catch (error) {
       console.log("error >> ", error);
@@ -61,6 +60,7 @@ export default function Register() {
                   type="text"
                   name="name"
                   id="name"
+                  autoComplete="off"
                   value={registerDetail.name}
                   onChange={onChangeHandler}
                   className="form-control bg-secondary border-0"
@@ -78,6 +78,7 @@ export default function Register() {
                   type="email"
                   name="email"
                   id="email"
+                  autoComplete="off"
                   value={registerDetail.email}
                   onChange={onChangeHandler}
                   className="form-control bg-secondary border-0"
@@ -95,6 +96,7 @@ export default function Register() {
                   type="password"
                   name="password"
                   id="password"
+                  autoComplete="off"
                   value={registerDetail.password}
                   onChange={onChangeHandler}
                   className="form-control bg-secondary border-0"

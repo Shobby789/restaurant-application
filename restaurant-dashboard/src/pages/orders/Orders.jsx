@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
-import "./Orders.css";
+import { Button, Card, Container, Table } from "react-bootstrap";
+import OrderModal from "../../components/modal/OrderModal";
+import { useNavigate } from "react-router-dom";
 
 export default function Orders() {
+  const [modalShow, setModalShow] = useState(false);
   const [orders, setOrders] = useState([]);
+  const navigate = useNavigate();
+
   const fetchOrders = async () => {
     try {
       const res = await fetch("http://localhost:4000/api/getOrders", {
@@ -22,120 +27,90 @@ export default function Orders() {
 
   useEffect(() => {
     fetchOrders();
-  }, []);
-
-  const acceptOrder = async (_id) => {
-    try {
-      const res = await fetch(`http://localhost:4000/api/order/${_id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ status: "Accepted" }),
-      });
-      const response = await res.json();
-      console.log("acceptOrder response >> ", response);
-    } catch (error) {
-      console.log("Accept order function error >> ", error);
-    }
-  };
-
-  const rejectOrder = async (_id) => {
-    try {
-      const res = await fetch(`http://localhost:4000/api/order/${_id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ status: "Rejected" }),
-      });
-      const response = await res.json();
-      console.log("rejectOrder response >> ", response);
-    } catch (error) {
-      console.log("Accept order function error >> ", error);
-    }
-  };
+  }, [orders]);
 
   return (
-    <div className="p-5 text-dark">
-      <h4>Orders</h4>
-      <div className="container py-3">
-        {orders.length > 0 ? (
-          <>
-            {orders.map(({ _id, status, orderAmount, orderedItems }) => {
-              return (
-                <div
-                  className="container rounded border border-dark py-4 my-5 text-light"
-                  key={_id}
-                >
-                  <div className="container w-100 px-0">
-                    <h6 className="text-dark">
-                      Order Status:
-                      <span className="btn btn-outline-danger btn-sm ms-1 disabled p-1 rounded">
-                        {status}
-                      </span>
-                    </h6>
-                    <h6 className="text-dark">
-                      Order Amount: <span>{orderAmount}</span>
-                    </h6>
-                  </div>
-                  <div className="container py-3">
-                    {orderedItems.map((orderItem) => {
-                      return (
-                        <div
-                          className="row my-3 rounded orderCard"
-                          key={orderItem._id}
-                        >
-                          <div className="col-sm d-flex align-items-center justify-content-center">
-                            <img
-                              src={orderItem.itemImage}
-                              alt=""
-                              width={180}
-                              height={"80%"}
-                            />
-                          </div>
-                          <div className="col-sm d-flex align-items-center justify-content-center">
-                            <h6>{orderItem.itemTitle}</h6>
-                          </div>
-                          <div className="col-sm d-flex align-items-center justify-content-center">
-                            <p>Rs. {orderItem.itemPrice}</p>
-                          </div>
-                          <div className="col-sm d-flex align-items-center justify-content-center">
-                            <p className="fw-lighter">
-                              Qty
-                              <span className="ms-1">
-                                {orderItem.cartQuantity}
-                              </span>
-                            </p>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                  <div className="container px-0">
-                    <button
-                      className="btn btn-outline-success me-1"
-                      onClick={() => acceptOrder(_id)}
-                    >
-                      Accept
-                    </button>
-                    <button
-                      className="btn btn-outline-danger ms-1"
-                      onClick={() => rejectOrder(_id)}
-                    >
-                      Reject
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
-          </>
-        ) : (
-          <>
-            <h4 className="text-light">No Orders</h4>
-          </>
-        )}
-      </div>
-    </div>
+    <Container
+      fluid
+      className="py-4 px-5 text-light"
+      style={{ height: "100vh", background: "black" }}
+    >
+      <Container className="border-bottom pb-3 mb-4">
+        <Card.Header as={"h4"} className="fw-semibold">
+          Orders
+        </Card.Header>
+      </Container>
+      {/* <OrderCard /> */}
+      <Container className="px-0">
+        <Table striped bordered hover variant="dark" className="text-center">
+          <thead>
+            <tr>
+              <th className="py-3 fs-6">Customer Name</th>
+              <th className="py-3 fs-6">Address</th>
+              <th className="py-3 fs-6">Order Status</th>
+              <th className="py-3 fs-6">Order Date</th>
+              <th className="py-3 fs-6">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {orders.length > 0 ? (
+              <>
+                {orders.map(
+                  ({
+                    customerAddress,
+                    status,
+                    _id,
+                    date,
+                    orderedItems,
+                    customerName,
+                  }) => {
+                    return (
+                      <>
+                        <tr key={_id}>
+                          <td>{customerName}</td>
+                          <td>{customerAddress}</td>
+                          {status === "Pending" || status === "Rejected" ? (
+                            <td className="fw-semibold text-danger">
+                              {status}
+                            </td>
+                          ) : (
+                            <td className="fw-semibold text-success">
+                              {status}
+                            </td>
+                          )}
+                          {/* <td className="fw-semibold">{status}</td> */}
+                          <td style={{ fontWeight: "400" }}>{date}</td>
+                          <td>
+                            <Button
+                              variant="warning"
+                              size="sm"
+                              className="fw-semibold"
+                              // onClick={() => setModalShow(true)}
+                              onClick={() =>
+                                navigate(`/order/order-details/${_id}`)
+                              }
+                            >
+                              View
+                            </Button>
+                          </td>
+                        </tr>
+                        <OrderModal
+                          show={modalShow}
+                          onHide={() => setModalShow(false)}
+                          items={orderedItems}
+                          _id={_id}
+                        />
+                      </>
+                    );
+                  }
+                )}
+              </>
+            ) : (
+              <></>
+            )}
+          </tbody>
+        </Table>
+      </Container>
+    </Container>
   );
 }

@@ -59,12 +59,18 @@ export default function ProductGrid() {
           >
             Burger
           </button>
-          <button className="btn btn-dark border-0 text-light pb-2 px-4 m-3 categoryBtn">
+          <button
+            className="btn btn-dark border-0 text-light pb-2 px-4 m-3 categoryBtn"
+            onClick={() => fetchBurgers("Pizza")}
+          >
             Pizza
           </button>
-          <button className="btn btn-dark border-0 text-light pb-2 px-4 m-3 categoryBtn">
+          {/* <button
+            className="btn btn-dark border-0 text-light pb-2 px-4 m-3 categoryBtn"
+            onClick={() => fetchBurgers("Deals")}
+          >
             Deals
-          </button>
+          </button> */}
           <button
             className="btn btn-dark border-0 text-light pb-2 px-4 m-3 categoryBtn"
             onClick={() => fetchBurgers("Drinks")}

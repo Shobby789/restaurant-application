@@ -1,49 +1,29 @@
-import React, { useEffect, useState } from "react";
-import AddItemForm from "../../components/addItemForm/AddItemForm";
-import ItemCard from "../../components/itemCard/ItemCard";
+import React, { useState } from "react";
+import { Card, Container } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import ProductCardGrid from "../../components/productCardGrid/ProductCardGrid";
+import AddItemForm from "../../components/itemForm/AddItemForm";
 
 export default function Items() {
-  const [items, setItems] = useState([]);
-  const getItems = async () => {
-    try {
-      await fetch("http://localhost:4000/api/getItems", {
-        method: "GET",
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setItems(data.data);
-          // console.log(data.data);
-        });
-    } catch (error) {
-      console.log("Server error: ", error);
-    }
-  };
-  useEffect(() => {
-    getItems();
-  }, []);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   return (
-    <div className="container-fluid p-5 text-dark">
-      <h2>Items</h2>
-      <div className="container">
-        <div className="container mb-3 d-flex flex-wrap justify-content-evenly align-items-center pb-5">
-          {items &&
-            items.map((item) => {
-              return (
-                <ItemCard
-                  _id={item._id}
-                  key={item._id}
-                  itemTitle={item.itemTitle}
-                  itemImage={`http://localhost:4000/uploads/${item.itemImage}`}
-                  itemDescription={item.itemDescription}
-                  itemPrice={item.itemPrice}
-                />
-              );
-            })}
-        </div>
-        <h3 className="text-center">Add Item</h3>
-        <AddItemForm />
-      </div>
-    </div>
+    <Container
+      className="py-4 px-5 text-light min-vh-100"
+      style={{ background: "black" }}
+    >
+      <Container className="border-bottom pb-3 mb-5 d-flex justify-content-between align-items-center">
+        <Card.Header as={"h4"} className="fw-semibold">
+          All Items
+        </Card.Header>
+        <Button variant="success" className="fw-semibold" onClick={handleShow}>
+          Add Item
+        </Button>
+      </Container>
+      <AddItemForm show={show} handleClose={handleClose} />
+      <ProductCardGrid />
+    </Container>
   );
 }

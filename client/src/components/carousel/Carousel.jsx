@@ -1,7 +1,7 @@
 import "./Carousel.css";
-import img2 from "../../images/black-bg/2.png";
-import img3 from "../../images/black-bg/3.png";
-import img4 from "../../images/black-bg/4.png";
+import img2 from "../../images/black-bg/jonathan-borba-8l8Yl2ruUsg-unsplash.jpg";
+import img3 from "../../images/black-bg/haseeb-jamil-J9lD6FS6_cs-unsplash.jpg";
+import img4 from "../../images/black-bg/janice-lin-yUIN4QWKCTw-unsplash.jpg";
 
 export default function Carousel() {
   return (

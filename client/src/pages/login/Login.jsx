@@ -60,6 +60,7 @@ export default function Login() {
                   type="email"
                   name="email"
                   id="email"
+                  autoComplete="off"
                   value={loginDetail.email}
                   onChange={handleOnChage}
                   className="form-control bg-secondary border-0"
@@ -77,6 +78,7 @@ export default function Login() {
                   type="password"
                   name="password"
                   id="password"
+                  autoComplete="off"
                   value={loginDetail.password}
                   onChange={handleOnChage}
                   className="form-control bg-secondary border-0"

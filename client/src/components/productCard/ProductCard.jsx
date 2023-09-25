@@ -16,7 +16,7 @@ export default function ProductCard({
       <div
         id={_id}
         key={_id}
-        className="card m-4 border-0 pt-3 pb-2"
+        className="card m-4 border-0 pt-0 pb-4"
         style={{
           width: "18rem",
           borderRadius: "20px",

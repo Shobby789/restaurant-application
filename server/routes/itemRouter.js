@@ -91,11 +91,29 @@ router.delete("/deleteItem/:_id", async (req, res) => {
   }
 });
 
-router.get(`/editItem/:_id`, (req, res) => {
+router.put(`/editItem/:_id`, async (req, res) => {
   try {
-    const { _id } = req.params._id;
-    console.log(_id);
+    const { _id } = req.params;
+    console.log("editItem >> ", _id);
+    const { itemTitle, itemDescription, itemCategory, itemPrice } = req.body;
+    const { filename } = req.file;
+    const itemToUpdate = await Item.findById({ _id });
+    if (itemToUpdate) {
+      await Item.findByIdAndUpdate(_id, {
+        $set: {
+          itemTitle,
+          itemDescription,
+          itemCategory,
+          itemPrice,
+          itemImage: filename,
+        },
+      });
+      res.status(201).json({ status: "Item Updated" });
+    } else {
+      res.status(201).json({ status: "Item could not be updated" });
+    }
   } catch (error) {
+    res.status(400).json({ status: "Something went wrong" });
     console.log("editItem api error >> ", error);
   }
 });
@@ -103,6 +121,7 @@ router.get(`/editItem/:_id`, (req, res) => {
 router.post("/placeOrder", async (req, res) => {
   const {
     customerId,
+    customerName,
     customerAddress,
     orderedItems,
     orderAmount,
@@ -112,6 +131,7 @@ router.post("/placeOrder", async (req, res) => {
   try {
     await Orders.create({
       customerId,
+      customerName,
       customerAddress,
       orderedItems,
       orderAmount,
@@ -128,7 +148,7 @@ router.post("/placeOrder", async (req, res) => {
 router.post("/getMyOrders", async (req, res) => {
   try {
     const { userId } = req.body;
-    console.log("getMyOrders userId >>> ", userId);
+    // console.log("getMyOrders userId >>> ", userId);
     const myOrders = await Orders.find({});
     const userOrder = myOrders.map((order) => {
       if (order.customerId == userId) {
@@ -144,6 +164,7 @@ router.post("/getMyOrders", async (req, res) => {
   }
 });
 
+// get logged in user orders
 router.get("/getOrders", async (req, res) => {
   try {
     const orders = await Orders.find();
@@ -173,6 +194,17 @@ router.put("/order/:_id", async (req, res) => {
   }
 });
 
+router.get("/getOrderDetails/:_id", async (req, res) => {
+  const { _id } = req.params;
+  // console.log("orderDetails ID >> ", _id);
+  try {
+    const findOrderDetails = await Orders.findById({ _id });
+    res.status(201).json(findOrderDetails);
+  } catch (error) {
+    res.status(400).json({ status: "Something went wrong" });
+  }
+});
+
 router.post("/fetchBurgers", async (req, res) => {
   try {
     const { category } = req.body;
@@ -185,6 +217,21 @@ router.post("/fetchBurgers", async (req, res) => {
   } catch (error) {
     res.status(400).send({ error: error });
     console.log("fetchBurgers error >> ", error);
+  }
+});
+
+router.get("/getItemDetails/:_id", async (req, res) => {
+  const { _id } = req.params;
+  // console.log("_id >> ", _id);
+  try {
+    const item = await Item.findById({ _id });
+    if (item) {
+      return res.status(201).json(item);
+    } else {
+      return res.status(201).json({ status: "Item not not found" });
+    }
+  } catch (error) {
+    return res.status(400).json({ status: "Something went wrong" });
   }
 });
 

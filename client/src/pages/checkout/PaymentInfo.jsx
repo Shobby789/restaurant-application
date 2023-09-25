@@ -23,7 +23,7 @@ export default function PaymentInfo({ customerDetail, setCustomerDetail }) {
               id="cardNumber"
               value={cardNumber}
               onChange={handleOnChange}
-              className="form-control py-2 border-0 bg-secondary text-light fw-semibold"
+              className="form-control py-2 border-0 rounded-0 bg-secondary text-light fw-semibold"
             />
           </div>
         </div>
@@ -38,7 +38,7 @@ export default function PaymentInfo({ customerDetail, setCustomerDetail }) {
               id="expiryDate"
               value={expiryDate}
               onChange={handleOnChange}
-              className="form-control py-2 border-0 bg-secondary text-light fw-semibold"
+              className="form-control py-2 border-0 rounded-0 bg-secondary text-light fw-semibold"
             />
           </div>
           <div className="col-lg-6 col-md-6 col-sm-12 mb-3">
@@ -51,7 +51,7 @@ export default function PaymentInfo({ customerDetail, setCustomerDetail }) {
               id="cvc"
               value={cvc}
               onChange={handleOnChange}
-              className="form-control py-2 border-0 bg-secondary text-light fw-semibold"
+              className="form-control py-2 border-0 rounded-0 bg-secondary text-light fw-semibold"
             />
           </div>
         </div>
@@ -64,7 +64,7 @@ export default function PaymentInfo({ customerDetail, setCustomerDetail }) {
               type="text"
               id="amountPayable"
               disabled
-              className="form-control bg-secondary text-light py-2 border-0 fw-semibold"
+              className="form-control bg-secondary rounded-0 text-light py-2 border-0 fw-semibold"
               name="amountPayable"
               value={`Rs.${cart.cartTotalAmount + 100}`}
             />

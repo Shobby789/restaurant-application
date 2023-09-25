@@ -2,7 +2,6 @@ import "./Home.css";
 import AboutSection from "../../components/aboutSection/AboutSection";
 import ProductGrid from "../../components/productGrid/ProductGrid";
 import SubscribeSection from "../../components/subscribeSection/SubscribeSection";
-import Footer from "../../components/footer/Footer";
 import Carousel from "../../components/carousel/Carousel";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -25,7 +24,6 @@ export default function Home() {
       </div>
       <ProductGrid />
       <SubscribeSection />
-      <Footer />
     </>
   );
 }
